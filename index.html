@@ -19,6 +19,29 @@
                 <p>Try to answer the following Javascript code questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
                 <button id="start-button" type="button">Start Quiz</button>
             </section>
+            <section id="questions-section">
+                <h1 id="question"></h1>
+                <ul>
+                    <li><button id="answer1" value="0" type="button"></button></li>
+                    <li><button id="answer2" value= "1" type="button"></button></li>
+                    <li><button id="answer3" value= "2" type="button"></button></li>
+                    <li><button id="answer4" value= "3" type="button"></button></li>
+                </ul>
+                <div id="correct-incorrect-message"></div>
+            </section>
+            <section id="game-over">
+                <h1>All done!</h1>
+                <p>Your final score is: <span id="final-score"></span></p>
+                <form>
+                    <label for="initials">Enter your intials:</label>
+                    <input type="text" id="initials" name="initials">
+                    <input type="submit" value="Submit">
+                </form>
+            </section>
+            <section id="highscores">
+                <h1>High Scores</h1>
+                <ol id="highscores-list"></ol>
+            </section>
         </main>
         <script src="./assets/js/script.js"></script>
     </body>

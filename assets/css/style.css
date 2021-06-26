@@ -8,6 +8,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* header style */
 header {
     display: flex;
     justify-content: space-between;
@@ -19,6 +20,15 @@ header a {
     color: rgb(235, 0, 235);
 }
 
+/* hide these sections unitl clicked */
+#questions-section, 
+#game-over, 
+#correct-incorrect-message, 
+#highscores {
+    display: none;
+}
+
+/* start quiz section style */
 #start {
     text-align: center;
 }
