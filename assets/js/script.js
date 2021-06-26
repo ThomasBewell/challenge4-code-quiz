@@ -4,9 +4,12 @@ let timeEl = document.querySelector("#timer");
 let timeRemaining = 75;
 
 //main sections
+//start page
+const startPageEl = document.querySelector("#start");
 //questions
 const questionSectionEl = document.querySelector("#questions-section");
 let questionsEl = document.querySelector("#question");
+let questionsIndex = 0;
 const ciMessage = document.querySelector("#correct-incorrect-message");
 //game over
 const gameOverEl = document.querySelector("#game-over");
@@ -52,3 +55,32 @@ const quesitons = [
         correctAnswer: "3"
     }
 ];
+
+//functions
+
+//timer function
+function startTimer() {
+    let timerInterval = setInterval (function() {
+        timeRemaining--;
+        timeEl.textContent = `Time:${timeRemaining}`;
+
+        if (timeRemaining === 0 || questionsIndex === questionsIndex.length) {
+            clearInterval(timerInterval);
+            questionSectionEl.style.display = "block";
+            finalScoreEl.textContent = timeRemaining;
+        }
+    }, 1000);
+}
+
+//start the quiz
+function startQuiz() {
+    startPageEl.style.display = "none";
+    questionsEl.style.display = "block";
+    questionsIndex = 0;
+
+    startTimer();
+    
+}
+
+//button functionality
+startBtn.addEventListener("click", startQuiz);
