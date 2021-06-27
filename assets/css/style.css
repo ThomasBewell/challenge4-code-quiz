@@ -20,7 +20,7 @@ header a {
     color: rgb(235, 0, 235);
 }
 
-/* hide these sections unitl clicked */
+/* hide these sections until needed */
 #questions-section, 
 #game-over, 
 #correct-incorrect-message, 

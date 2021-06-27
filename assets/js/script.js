@@ -10,14 +10,14 @@ const startPageEl = document.querySelector("#start");
 const questionSectionEl = document.querySelector("#questions-section");
 let questionsEl = document.querySelector("#question");
 let questionsIndex = 0;
-const ciMessage = document.querySelector("#correct-incorrect-message");
+const ciMessageEl = document.querySelector("#correct-incorrect-message");
 //game over
 const gameOverEl = document.querySelector("#game-over");
 let finalScoreEl = document.querySelector("#final-score");
 let initialsSubmit = document.querySelector("#initials");
 //high scores
 const highscoresEl = document.querySelector("#highscores");
-let highscoresList = document.querySelector("#highscores-list");
+let highscoresListEl = document.querySelector("#highscores-list");
 
 //buttons
 const startBtn = document.querySelector("#start-button");
@@ -25,10 +25,11 @@ const answer1Btn = document.querySelector("#answer1");
 const answer2Btn = document.querySelector("#answer2");
 const answer3Btn = document.querySelector("#answer3");
 const answer4Btn = document.querySelector("#answer4");
+const answerBtn = document.querySelectorAll(".answer-button")
 const submitScoreBtn = document.querySelector("#submit-score");
 
 //questions and answers array
-const quesitons = [
+const questions = [
     {
         question: "Commonly used data types do NOT include:",
         answers: ["1. strings", "2. booleans", "3. alerts", "4. numbers"],
@@ -50,7 +51,7 @@ const quesitons = [
         correctAnswer: "2"
     },
     {
-        quesiton: "A very useful tool used during development and debugging for printing content to the debugger is:",
+        question: "A very useful tool used during development and debugging for printing content to the debugger is:",
         answers: ["1. Javascript", "2. terminal/bash", "3. for loops", "4. console.log"],
         correctAnswer: "3"
     }
@@ -75,12 +76,57 @@ function startTimer() {
 //start the quiz
 function startQuiz() {
     startPageEl.style.display = "none";
-    questionsEl.style.display = "block";
+    questionSectionEl.style.display = "block";
     questionsIndex = 0;
 
     startTimer();
+    displayQuestion(questionsIndex);
+}
+
+//display questions
+function displayQuestion(i) {
+    if (i < questions.length) {
+        questionsEl.textContent = questions[i].question;
+        answer1Btn.textContent = questions[i].answers[0];
+        answer2Btn.textContent = questions[i].answers[1];
+        answer3Btn.textContent = questions[i].answers[2];
+        answer4Btn.textContent = questions[i].answers[3];
+    }
+}
+
+//check given answer against correct answer
+function checkAnswer(event) {
+
     
+    //tell user if they got it right, subtract time if not
+    ciMessageEl.style.display = "block";
+    let message = document.createElement("message");
+    ciMessageEl.appendChild(message);
+
+    if (questions[questionsIndex].correctAnswer === event.target.value) {
+        message.textContent = "Correct!";
+    } else if (questions[questionsIndex].correctAnswer !== event.target.value) {
+        timeRemaining = timeRemaining - 10;
+        message.textContent = "Incorrect!";
+    }
+
+    //message lasts one second
+    setTimeout (function () {
+        message.style.display = "none";
+    }, 1000);
+    
+    //move on to next question
+    if (questionsIndex < questions.length) {
+        questionsIndex++;
+    }
+    displayQuestion(questionsIndex);
 }
 
 //button functionality
+//start quiz button
 startBtn.addEventListener("click", startQuiz);
+
+//answer buttons
+answerBtn.forEach(i => {
+    i.addEventListener("click", checkAnswer);
+});
